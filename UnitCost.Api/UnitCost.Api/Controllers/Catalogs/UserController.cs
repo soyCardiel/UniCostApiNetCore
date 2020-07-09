@@ -17,10 +17,5 @@ namespace UnitCost.Api.Controllers.Catalogs
             domain = GetDomainInstance<IUserDomain>();
         }
 
-        [HttpGet("SayHi")]
-        public IActionResult SayHi(string name)
-        {
-            return Ok( domain.GetUser());
-        }
     }
 }

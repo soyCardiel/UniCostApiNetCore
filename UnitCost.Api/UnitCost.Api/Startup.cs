@@ -7,6 +7,7 @@ using UnitCost.Dao.Catalogs.Contract;
 using UnitCost.Dao.Catalogs.Impl;
 using UnitCost.Domain.Catalogs.Contract;
 using UnitCost.Domain.Catalogs.Impl;
+using UnitCost.Dto.Common;
 
 namespace UnitCost.Api
 {
@@ -53,6 +54,7 @@ namespace UnitCost.Api
         {
             // creating cors filters
             services.AddCors(opts => { opts.AddPolicy("UnitCostCors", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()); });
+            services.Configure<ConfigurationDto>(Configuration.GetSection("ConnectionStrings"));
 
             services.AddScoped<IUserDomain, UserDomain>();
             services.AddScoped<IUserDao, UserDao>();

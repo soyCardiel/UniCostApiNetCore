@@ -18,7 +18,7 @@ namespace UnitCost.Domain.Catalogs.Impl
 
         public UserDto GetUser()
         {
-            return dao.GetUser();
+            return dao.GetById(1);
         }
     }
 }

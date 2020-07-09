@@ -4,18 +4,18 @@ using System.Text;
 
 namespace UnitCost.Dao.Contract
 {
-    public interface IBaseDao
+    public interface IBaseDao<TEntity>
     {
-        T GetById<T>(object id);
-        List<T> GetAll<T>();
+        TEntity GetById(object id);
+        IEnumerable<TEntity> GetAll();
 
-        long CreateEntity<T>(T entity);
-        bool UpdateEntity<T>(T entity);
-        bool DeleteEntity<T>(T entity);
+        long CreateEntity(TEntity entity);
+        bool UpdateEntity(TEntity entity);
+        bool DeleteEntity(TEntity entity);
 
-        long CreateEntity<T>(IEnumerable<T> entity);
-        bool UpdateEntity<T>(IEnumerable<T> entity);
-        bool DeleteEntity<T>(IEnumerable<T> entity);
+        long CreateEntities(IEnumerable<TEntity> entity);
+        bool UpdateEntity(IEnumerable<TEntity> entity);
+        bool DeleteEntity(IEnumerable<TEntity> entity);
 
     }
 }

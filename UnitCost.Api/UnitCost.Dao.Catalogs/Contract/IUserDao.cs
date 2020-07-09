@@ -6,8 +6,7 @@ using UnitCost.Dto.Catalalogs;
 
 namespace UnitCost.Dao.Catalogs.Contract
 {
-    public interface IUserDao : IBaseDao
+    public interface IUserDao : IBaseDao<UserDto>
     {
-        UserDto GetUser();
     }
 }

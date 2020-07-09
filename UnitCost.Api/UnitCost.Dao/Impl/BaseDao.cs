@@ -1,6 +1,10 @@
-﻿using Microsoft.Extensions.Options;
+﻿using Dapper;
+using Dapper.Contrib.Extensions;
+using Microsoft.Extensions.Options;
+using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
@@ -10,7 +14,7 @@ using UnitCost.Dto.Common;
 
 namespace UnitCost.Dao.Impl
 {
-    public class BaseDao : IBaseDao
+    public class BaseDao<TEntity> : IBaseDao<TEntity> where TEntity : class
     {
         private readonly ConfigurationDto Config;
 
@@ -19,54 +23,155 @@ namespace UnitCost.Dao.Impl
             Config = config.Value;
         }
 
-        public UserDto GetUser()
+        private IEnumerable<T> ExecSp<T>(string storedProcedure, object parameters)
         {
+            string connectionString = Config.DatabaseConnection;
+            IEnumerable<T> result = default ;
 
-            return new UserDto
+            if(!string.IsNullOrEmpty(storedProcedure))
             {
-                Firstname = "Edgar",
-                Lastname = "Cardiel"
-            };
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    result = connection.Query<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
+                }
+            }
+
+            return result;
         }
 
-        public long CreateEntity<T>(T entity)
+        protected IEnumerable<T> ExecuteStoredProcedure<T>(string storesProcedure, object parameters)
         {
-            throw new NotImplementedException();
+            return ExecSp<T>(storesProcedure, parameters);
         }
 
-        public long CreateEntity<T>(IEnumerable<T> entity)
+        public long CreateEntity(TEntity entity)
         {
-            throw new NotImplementedException();
+            string connectionString = Config.DatabaseConnection;
+            long result = default;
+
+            if(entity != null)
+            {
+                using(MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    result = connection.Insert(entity);
+                }
+            }
+
+            return result;
         }
 
-        public bool DeleteEntity<T>(T entity)
+        public long CreateEntities(IEnumerable<TEntity> entity)
         {
-            throw new NotImplementedException();
+            string connectionString = Config.DatabaseConnection;
+            long result = default;
+
+            if (entity != null)
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    result = connection.Insert(entity);
+                }
+            }
+
+            return result;
         }
 
-        public bool DeleteEntity<T>(IEnumerable<T> entity)
+        public bool DeleteEntity(TEntity entity)
         {
-            throw new NotImplementedException();
+            string connectionString = Config.DatabaseConnection;
+            bool result = default;
+
+            if (entity != null)
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    result = connection.Delete(entity);
+                }
+            }
+
+            return result;
         }
 
-        public List<T> GetAll<T>()
+        public bool DeleteEntity(IEnumerable<TEntity> entity)
         {
-            throw new NotImplementedException();
+            string connectionString = Config.DatabaseConnection;
+            bool result = default;
+
+            if (entity != null)
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    result = connection.Delete(entity);
+                }
+            }
+
+            return result;
         }
 
-        public T GetById<T>(object id)
+        public IEnumerable<TEntity> GetAll()
         {
-            throw new NotImplementedException();
+            string connectionString = Config.DatabaseConnection;
+            IEnumerable<TEntity> result = default;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                result = connection.GetAll<TEntity>();
+            }
+
+            return result;
         }
 
-        public bool UpdateEntity<T>(T entity)
+        public TEntity GetById(object id)
         {
-            throw new NotImplementedException();
+            string connectionString = Config.DatabaseConnection;
+            TEntity result = default;
+
+            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            {
+                connection.Open();
+                result = connection.Get<TEntity>(id);
+            }
+
+            return result;
         }
 
-        public bool UpdateEntity<T>(IEnumerable<T> entity)
+        public bool UpdateEntity(TEntity entity)
         {
-            throw new NotImplementedException();
+            string connectionString = Config.DatabaseConnection;
+            bool result = default;
+
+            if (entity != null)
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    result = connection.Update(entity);
+                }
+            }
+
+            return result;
+        }
+
+        public bool UpdateEntity(IEnumerable<TEntity> entity)
+        {
+            string connectionString = Config.DatabaseConnection;
+            bool result = default;
+
+            if (entity != null)
+            {
+                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                {
+                    connection.Open();
+                    result = connection.Update(entity);
+                }
+            }
+
+            return result;
         }
     }
 }
