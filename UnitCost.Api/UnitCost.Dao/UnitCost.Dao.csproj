@@ -10,7 +10,6 @@
 
   <ItemGroup>
     <ProjectReference Include="..\UnitCost.Dto\UnitCost.Dto.csproj" />
-    <ProjectReference Include="..\UnitCost.Migration\UnitCost.DBMigrations.csproj" />
   </ItemGroup>
 
 </Project>

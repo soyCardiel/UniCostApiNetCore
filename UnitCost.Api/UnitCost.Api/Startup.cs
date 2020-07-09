@@ -1,22 +1,12 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Options;
 using UnitCost.Dao.Catalogs.Contract;
 using UnitCost.Dao.Catalogs.Impl;
 using UnitCost.Domain.Catalogs.Contract;
 using UnitCost.Domain.Catalogs.Impl;
-using UnitCost.DBMigrations;
 
 namespace UnitCost.Api
 {
@@ -63,7 +53,6 @@ namespace UnitCost.Api
         {
             // creating cors filters
             services.AddCors(opts => { opts.AddPolicy("UnitCostCors", builder => builder.AllowAnyOrigin().AllowAnyHeader().AllowAnyMethod()); });
-            services.AddDbContext<UnitCostAppContext>(opts => opts.UseMySql(Configuration.GetConnectionString("DatabaseConnection")));
 
             services.AddScoped<IUserDomain, UserDomain>();
             services.AddScoped<IUserDao, UserDao>();
