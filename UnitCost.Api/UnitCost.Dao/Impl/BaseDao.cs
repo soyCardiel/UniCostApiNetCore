@@ -7,19 +7,16 @@ using System.Text;
 using UnitCost.Dao.Contract;
 using UnitCost.Dto.Catalalogs;
 using UnitCost.Dto.Common;
-using UnitCost.DBMigrations;
 
 namespace UnitCost.Dao.Impl
 {
     public class BaseDao : IBaseDao
     {
         private readonly ConfigurationDto Config;
-        private readonly UnitCostAppContext DbContext;
 
-        public BaseDao(IOptions<ConfigurationDto> config, UnitCostAppContext db)
+        public BaseDao(IOptions<ConfigurationDto> config)
         {
             Config = config.Value;
-            DbContext = db;
         }
 
         public UserDto GetUser()
