@@ -1,0 +1,12 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\UnitCost.Dao.Catalogs\UnitCost.Dao.Catalogs.csproj" />
+    <ProjectReference Include="..\UnitCost.Domain\UnitCost.Domain.csproj" />
+  </ItemGroup>
+
+</Project>
