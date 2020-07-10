@@ -58,6 +58,9 @@ namespace UnitCost.Api
 
             services.AddScoped<IUserDomain, UserDomain>();
             services.AddScoped<IUserDao, UserDao>();
+
+            services.AddScoped<IProjectDao, ProjectDao>();
+            services.AddScoped<IProjectDomain, ProjectDomain>();
         }
     }
 }
