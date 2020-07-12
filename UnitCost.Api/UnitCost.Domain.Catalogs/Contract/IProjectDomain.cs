@@ -8,5 +8,6 @@ namespace UnitCost.Domain.Catalogs.Contract
     public interface IProjectDomain
     {
         List<BasicProjectDto> GetProjectList();
+        BasicProjectDto CreateProject(BasicProjectDto model);
     }
 }

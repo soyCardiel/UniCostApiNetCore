@@ -29,5 +29,20 @@ namespace UnitCost.Domain.Catalogs.Impl
                 throw ex;
             }
         }
+
+        public BasicProjectDto CreateProject(BasicProjectDto model)
+        {
+            try
+            {
+                long id = dao.CreateEntity(model);
+                model.Id = Convert.ToInt32(id);
+
+                return model;
+            }
+            catch(Exception ex)
+            {
+                throw ex;
+            }
+        }
     }
 }

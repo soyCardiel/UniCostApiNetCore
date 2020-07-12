@@ -23,5 +23,12 @@ namespace UnitCost.Api.Controllers.Catalogs
         {
             return domain.GetProjectList();
         }
+
+        [HttpPost("CreateBasicProject")]
+        [Produces(typeof(BasicProjectDto))]
+        public BasicProjectDto CreateBasicProject(BasicProjectDto model)
+        {
+            return domain.CreateProject(model);
+        }
     }
 }

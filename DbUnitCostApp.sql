@@ -29,3 +29,14 @@ CREATE TABLE IF NOT EXISTS Role(
  */
 
 
+CREATE TABLE IF NOT EXISTS Project(
+	Id INT AUTO_INCREMENT NOT NULL,
+	Name VARCHAR(200),
+	Description VARCHAR(2000),
+	CONSTRAINT PRIMARY KEY (Id)
+);
+
+/* DROP TABLE Project;
+ * INSERT INTO Project (Name, Description) VALUES ( 'Projecto 1', 'Esta es la descripcion para el projecto 1'), ( 'Projecto 2', 'Esta es la descripcion para el projecto 2');
+ * SELECT * FROM Project;
+ */
