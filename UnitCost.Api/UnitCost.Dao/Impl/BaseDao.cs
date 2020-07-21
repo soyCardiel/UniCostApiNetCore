@@ -1,10 +1,10 @@
 ﻿using Dapper;
 using Dapper.Contrib.Extensions;
 using Microsoft.Extensions.Options;
-using MySql.Data.MySqlClient;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Dynamic;
 using System.Linq;
 using System.Text;
@@ -30,7 +30,7 @@ namespace UnitCost.Dao.Impl
 
             if(!string.IsNullOrEmpty(storedProcedure))
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     result = connection.Query<T>(storedProcedure, parameters, commandType: CommandType.StoredProcedure);
                 }
@@ -51,7 +51,7 @@ namespace UnitCost.Dao.Impl
 
             if(entity != null)
             {
-                using(MySqlConnection connection = new MySqlConnection(connectionString))
+                using(SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
                     result = connection.Insert(entity);
@@ -68,7 +68,7 @@ namespace UnitCost.Dao.Impl
 
             if (entity != null)
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
                     result = connection.Insert(entity);
@@ -85,7 +85,7 @@ namespace UnitCost.Dao.Impl
 
             if (entity != null)
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
                     result = connection.Delete(entity);
@@ -102,7 +102,7 @@ namespace UnitCost.Dao.Impl
 
             if (entity != null)
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
                     result = connection.Delete(entity);
@@ -117,7 +117,7 @@ namespace UnitCost.Dao.Impl
             string connectionString = Config.DatabaseConnection;
             IEnumerable<TEntity> result = default;
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 result = connection.GetAll<TEntity>();
@@ -131,7 +131,7 @@ namespace UnitCost.Dao.Impl
             string connectionString = Config.DatabaseConnection;
             TEntity result = default;
 
-            using (MySqlConnection connection = new MySqlConnection(connectionString))
+            using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
                 result = connection.Get<TEntity>(id);
@@ -147,7 +147,7 @@ namespace UnitCost.Dao.Impl
 
             if (entity != null)
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
                     result = connection.Update(entity);
@@ -164,7 +164,7 @@ namespace UnitCost.Dao.Impl
 
             if (entity != null)
             {
-                using (MySqlConnection connection = new MySqlConnection(connectionString))
+                using (SqlConnection connection = new SqlConnection(connectionString))
                 {
                     connection.Open();
                     result = connection.Update(entity);

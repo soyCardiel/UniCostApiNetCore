@@ -61,6 +61,12 @@ namespace UnitCost.Api
 
             services.AddScoped<IProjectDao, ProjectDao>();
             services.AddScoped<IProjectDomain, ProjectDomain>();
+
+            services.AddScoped<ISingleCostCatalogDomain, SingleCostCatalogDomain>();
+            services.AddScoped<ISingleCostCatalogDao, SingleCostCatalogDao>();
+
+            services.AddScoped<IMeasureUnitDomain, MeasureUnitDomain>();
+            services.AddScoped<IMeasureUnitDao, MeasureUnitDao>();
         }
     }
 }
